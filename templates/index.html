@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Medicine Scanner</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
+            min-height:100vh;
+            color:white;
+        }
+
+        .navbar{
+            width:100%;
+            padding:20px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(10px);
+            box-shadow:0px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo{
+            font-size:30px;
+            font-weight:bold;
+            color:#00e5ff;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            margin-left:25px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#00e5ff;
+        }
+
+        .main-container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:50px;
+        }
+
+        .scanner-box{
+            width:750px;
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(15px);
+            border-radius:30px;
+            padding:45px;
+            box-shadow:0px 0px 25px rgba(0,0,0,0.4);
+        }
+
+        .scanner-box h1{
+            text-align:center;
+            margin-bottom:15px;
+            font-size:50px;
+            color:#00e5ff;
+        }
+
+        .scanner-box p{
+            text-align:center;
+            color:#ddd;
+            margin-bottom:30px;
+            font-size:18px;
+        }
+
+        .custom-upload{
+
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+            border:3px dashed #00e5ff;
+
+            border-radius:25px;
+
+            padding:70px;
+
+            cursor:pointer;
+
+            transition:0.3s;
+
+            background:rgba(255,255,255,0.04);
+
+            margin-bottom:30px;
+        }
+
+        .custom-upload:hover{
+
+            transform:scale(1.02);
+
+            background:rgba(0,229,255,0.08);
+
+            box-shadow:0px 0px 25px #00e5ff;
+        }
+
+        .custom-upload input{
+
+            display:none;
+        }
+
+        .upload-icon{
+
+            font-size:80px;
+
+            color:#00e5ff;
+
+            margin-bottom:20px;
+        }
+
+        .custom-upload h2{
+
+            color:white;
+
+            margin-bottom:10px;
+
+            font-size:32px;
+        }
+
+        .custom-upload p{
+
+            color:#bbb;
+
+            font-size:18px;
+        }
+
+        .scan-btn{
+            width:100%;
+            padding:18px;
+            border:none;
+            border-radius:18px;
+            background:#00e5ff;
+            color:black;
+            font-size:22px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .scan-btn:hover{
+            transform:scale(1.03);
+            box-shadow:0px 0px 20px #00e5ff;
+        }
+
+        .result-box{
+            margin-top:35px;
+            background:rgba(255,255,255,0.05);
+            padding:25px;
+            border-radius:20px;
+        }
+
+        .result-box h2{
+            margin-bottom:20px;
+            color:#00e5ff;
+            text-align:center;
+        }
+
+        .result-box p{
+            text-align:left;
+            margin:12px 0;
+            font-size:19px;
+            color:white;
+        }
+
+        .safe{
+            color:#00ff99;
+            font-size:24px;
+            font-weight:bold;
+            text-align:center;
+        }
+
+        .expired{
+            color:#ff4b5c;
+            font-size:24px;
+            font-weight:bold;
+            text-align:center;
+        }
+
+        .real{
+            color:#00ff99;
+            font-size:30px;
+            font-weight:bold;
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .fake{
+            color:#ff4b5c;
+            font-size:30px;
+            font-weight:bold;
+            text-align:center;
+            margin-top:20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            MedSafe AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/scanner">Scanner</a>
+
+            <a href="/complaint">Complaint</a>
+
+            <a href="/view_complaints">Complaints</a>
+
+            <a href="/about">About</a>
+            <a href = "/medicine_info">Medicine Info</a>
+
+        </div>
+
+    </div>
+
+    <div class="main-container">
+
+        <div class="scanner-box">
+
+            <h1>AI Medicine Scanner</h1>
+
+            <p>
+                Upload your medicine strip image and let AI analyze it instantly.
+            </p>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <label for="file-upload" class="custom-upload">
+
+                    <div class="upload-icon">
+
+                        ⬆
+
+                    </div>
+
+                    <h2>Drag & Drop Medicine Image</h2>
+
+                    <p>
+                        or click to browse files
+                    </p>
+
+                    <input 
+                    id="file-upload"
+                    type="file"
+                    name="image"
+                    required>
+
+                </label>
+
+                <button type="submit" class="scan-btn">
+
+                    🚀 Analyze Medicine
+
+                </button>
+
+            </form>
+
+            {% if medicine %}
+
+            <div class="result-box">
+
+                <h2>Scan Results</h2>
+
+                <p><b>Medicine:</b> {{ medicine }}</p>
+
+                <p><b>Uses:</b> {{ uses }}</p>
+
+                <p><b>Side Effects:</b> {{ side_effects }}</p>
+
+                <p><b>Manufacturing Date:</b> {{ mfg }}</p>
+
+                <p><b>Expiry Date:</b> {{ exp }}</p>
+
+                {% if status == "Expired" %}
+
+                <p class="expired">
+
+                    ⚠ {{ status }}
+
+                </p>
+
+                {% else %}
+
+                <p class="safe">
+
+                    ✅ {{ status }}
+
+                </p>
+
+                {% endif %}
+
+                {% if fake_status == "REAL MEDICINE" %}
+
+                <p class="real">
+
+                    🟢 {{ fake_status }}
+
+                </p>
+
+                {% else %}
+
+                <p class="fake">
+
+                    🔴 {{ fake_status }}
+
+                </p>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Medicine Safety System</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:linear-gradient(to right,#141e30,#243b55);
+            color:white;
+            min-height:100vh;
+        }
+
+        .navbar{
+            width:100%;
+            padding:20px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(10px);
+            box-shadow:0px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo{
+            font-size:30px;
+            font-weight:bold;
+            color:#00d4ff;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            margin-left:25px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#00d4ff;
+        }
+
+        .hero{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:85vh;
+            text-align:center;
+            flex-direction:column;
+            padding:20px;
+        }
+
+        .hero h1{
+            font-size:70px;
+            margin-bottom:20px;
+            text-shadow:0px 0px 20px rgba(0,212,255,0.5);
+        }
+
+        .hero p{
+            font-size:22px;
+            color:#dcdcdc;
+            width:70%;
+            line-height:1.8;
+            margin-bottom:40px;
+        }
+
+        .buttons{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+            justify-content:center;
+        }
+
+        .buttons a{
+            text-decoration:none;
+        }
+
+        .buttons button{
+            padding:15px 35px;
+            border:none;
+            border-radius:40px;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+            font-weight:bold;
+        }
+
+        .scan-btn{
+            background:#00d4ff;
+            color:black;
+        }
+
+        .scan-btn:hover{
+            transform:scale(1.1);
+            box-shadow:0px 0px 20px #00d4ff;
+        }
+
+        .complaint-btn{
+            background:#ff4b5c;
+            color:white;
+        }
+
+        .complaint-btn:hover{
+            transform:scale(1.1);
+            box-shadow:0px 0px 20px #ff4b5c;
+        }
+
+        .view-btn{
+            background:#28c76f;
+            color:white;
+        }
+
+        .view-btn:hover{
+            transform:scale(1.1);
+            box-shadow:0px 0px 20px #28c76f;
+        }
+
+        .about-btn{
+            background:#f39c12;
+            color:white;
+        }
+
+        .about-btn:hover{
+            transform:scale(1.1);
+            box-shadow:0px 0px 20px #f39c12;
+        }
+
+        .footer{
+            text-align:center;
+            padding:20px;
+            color:#bbb;
+            font-size:16px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            MedSafe AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/scanner">Scanner</a>
+
+            <a href="/complaint">Complaint</a>
+
+            <a href="/view_complaints">Registered Complaints</a>
+
+            <a href="/about">About</a>
+
+        </div>
+
+    </div>
+
+    <div class="hero">
+
+        <h1>AI Medicine Safety Detector</h1>
+
+        <p>
+
+            Detect fake medicines, identify expiry dates,
+            analyze medicine information using OCR technology,
+            and register complaints against suspicious medical shops.
+
+        </p>
+
+        <div class="buttons">
+
+            <a href="/scanner">
+                <button class="scan-btn">
+                    Scan Medicine
+                </button>
+            </a>
+
+            <a href="/complaint">
+                <button class="complaint-btn">
+                    Register Complaint
+                </button>
+            </a>
+
+            <a href="/view_complaints">
+                <button class="view-btn">
+                    View Complaints
+                </button>
+            </a>
+
+            <a href="/about">
+                <button class="about-btn">
+                    About Project
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+
+        © 2026 Medicine Safety System | AI Powered Healthcare Protection
+
+    </div>
+
+</body>
+
+</html>

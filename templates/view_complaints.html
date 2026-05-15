@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Registered Complaints</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin:0;
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#2c3e50;
+            padding:15px;
+            text-align:center;
+        }
+
+        .navbar a{
+            color:white;
+            text-decoration:none;
+            margin:20px;
+            font-size:18px;
+            font-weight:bold;
+        }
+
+        .navbar a:hover{
+            color:#3498db;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+            margin-top:40px;
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0px 0px 10px gray;
+        }
+
+        h1{
+            text-align:center;
+            color:#2c3e50;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:30px;
+        }
+
+        th, td{
+            border:1px solid #ccc;
+            padding:15px;
+            text-align:center;
+        }
+
+        th{
+            background:#3498db;
+            color:white;
+        }
+
+        tr:nth-child(even){
+            background:#f2f2f2;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <a href="/">Home</a>
+
+        <a href="/scanner">Scanner</a>
+
+        <a href="/complaint">Complaint</a>
+
+        <a href="/view_complaints">Registered Complaints</a>
+
+        <a href="/about">About</a>
+
+    </div>
+
+    <div class="container">
+
+        <h1>Registered Complaints</h1>
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Shop</th>
+                <th>Location</th>
+                <th>Medicine</th>
+                <th>Complaint</th>
+
+            </tr>
+
+            {% for complaint in complaints %}
+
+            <tr>
+
+                <td>{{ complaint[0] }}</td>
+                <td>{{ complaint[1] }}</td>
+                <td>{{ complaint[2] }}</td>
+                <td>{{ complaint[3] }}</td>
+                <td>{{ complaint[4] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>

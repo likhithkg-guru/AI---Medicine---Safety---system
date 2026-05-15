@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>About MedSafe AI</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
+            color:white;
+            min-height:100vh;
+        }
+
+        .navbar{
+            width:100%;
+            padding:20px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(10px);
+            box-shadow:0px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo{
+            font-size:30px;
+            font-weight:bold;
+            color:#00e5ff;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            margin-left:25px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#00e5ff;
+        }
+
+        .container{
+            width:85%;
+            margin:auto;
+            margin-top:50px;
+        }
+
+        .hero{
+            text-align:center;
+            margin-bottom:60px;
+        }
+
+        .hero h1{
+            font-size:65px;
+            color:#00e5ff;
+            margin-bottom:20px;
+        }
+
+        .hero p{
+            font-size:22px;
+            color:#dcdcdc;
+            line-height:1.8;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+            margin-top:40px;
+        }
+
+        .card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(12px);
+            border-radius:25px;
+            padding:35px;
+            transition:0.3s;
+            box-shadow:0px 0px 20px rgba(0,0,0,0.3);
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+            box-shadow:0px 0px 25px #00e5ff;
+        }
+
+        .card h2{
+            color:#00e5ff;
+            margin-bottom:20px;
+            font-size:30px;
+        }
+
+        .card p{
+            color:#e0e0e0;
+            font-size:18px;
+            line-height:1.7;
+        }
+
+        .footer{
+            text-align:center;
+            margin-top:60px;
+            padding:25px;
+            color:#bbb;
+            font-size:17px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            MedSafe AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/scanner">Scanner</a>
+
+            <a href="/medicine_info">Medicine Info</a>
+
+            <a href="/complaint">Complaint</a>
+
+            <a href="/view_complaints">Complaints</a>
+
+            <a href="/about">About</a>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="hero">
+
+            <h1>About MedSafe AI</h1>
+
+            <p>
+
+                MedSafe AI is an intelligent healthcare platform
+                designed to detect fake medicines, analyze medicine
+                details using OCR technology, and improve medicine
+                safety awareness among people.
+
+            </p>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h2>💊 Fake Detection</h2>
+
+                <p>
+
+                    Our AI system scans medicine strips and identifies
+                    suspicious or fake medicines using OCR text analysis
+                    and database verification.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>🧠 AI Scanner</h2>
+
+                <p>
+
+                    The scanner extracts medicine names, expiry dates,
+                    and medicine information automatically from uploaded
+                    images.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>📋 Complaint System</h2>
+
+                <p>
+
+                    Users can register complaints against suspicious
+                    medical shops and maintain a public complaint
+                    database.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>🔍 Medicine Search</h2>
+
+                <p>
+
+                    Users can search for medicine information including
+                    uses and side effects instantly.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>🌍 Healthcare Vision</h2>
+
+                <p>
+
+                    Our goal is to build a smarter healthcare ecosystem
+                    that protects people from counterfeit medicines and
+                    improves medicine awareness.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>🚀 Future Scope</h2>
+
+                <p>
+
+                    Future upgrades include barcode verification,
+                    AI image matching, cloud database integration,
+                    and mobile camera scanning.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+
+            © 2026 MedSafe AI | AI Powered Healthcare Protection System
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
