@@ -7,64 +7,161 @@
 
     <style>
 
-        body{
-            font-family: Arial;
+        *{
             margin:0;
-            background:#f4f6f9;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
+            min-height:100vh;
+            color:white;
         }
 
         .navbar{
-            background:#2c3e50;
-            padding:15px;
-            text-align:center;
+
+            width:100%;
+            padding:20px 60px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            background:rgba(255,255,255,0.05);
+
+            backdrop-filter:blur(10px);
+
+            box-shadow:0px 2px 10px rgba(0,0,0,0.3);
         }
 
-        .navbar a{
-            color:white;
-            text-decoration:none;
-            margin:20px;
-            font-size:18px;
+        .logo{
+
+            font-size:30px;
             font-weight:bold;
+            color:#00e5ff;
         }
 
-        .navbar a:hover{
-            color:#3498db;
+        .nav-links a{
+
+            text-decoration:none;
+            color:white;
+            margin-left:25px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#00e5ff;
         }
 
         .container{
-            width:90%;
+
+            width:92%;
             margin:auto;
-            margin-top:40px;
-            background:white;
-            padding:30px;
-            border-radius:15px;
-            box-shadow:0px 0px 10px gray;
+            margin-top:50px;
         }
 
-        h1{
+        .title{
+
             text-align:center;
-            color:#2c3e50;
+            margin-bottom:40px;
+        }
+
+        .title h1{
+
+            font-size:60px;
+            color:#00e5ff;
+            margin-bottom:15px;
+        }
+
+        .title p{
+
+            font-size:20px;
+            color:#dcdcdc;
+        }
+
+        .table-box{
+
+            background:rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(12px);
+
+            border-radius:30px;
+
+            padding:35px;
+
+            box-shadow:0px 0px 25px rgba(0,0,0,0.4);
+
+            overflow-x:auto;
         }
 
         table{
+
             width:100%;
             border-collapse:collapse;
-            margin-top:30px;
-        }
-
-        th, td{
-            border:1px solid #ccc;
-            padding:15px;
-            text-align:center;
+            overflow:hidden;
+            border-radius:20px;
         }
 
         th{
-            background:#3498db;
+
+            background:linear-gradient(to right,#00c6ff,#0072ff);
+
+            padding:22px;
+
+            font-size:20px;
+
             color:white;
+
+            text-transform:uppercase;
         }
 
-        tr:nth-child(even){
-            background:#f2f2f2;
+        td{
+
+            padding:22px;
+
+            text-align:center;
+
+            font-size:18px;
+
+            background:rgba(255,255,255,0.06);
+
+            border-bottom:1px solid rgba(255,255,255,0.08);
+
+            color:#f5f5f5;
+        }
+
+        tr:hover td{
+
+            background:rgba(0,229,255,0.12);
+
+            transition:0.3s;
+        }
+
+        .no-data{
+
+            text-align:center;
+
+            padding:40px;
+
+            font-size:28px;
+
+            color:#ff4b5c;
+        }
+
+        .badge{
+
+            background:#ff4b5c;
+
+            padding:8px 18px;
+
+            border-radius:30px;
+
+            font-size:15px;
+
+            font-weight:bold;
         }
 
     </style>
@@ -75,49 +172,101 @@
 
     <div class="navbar">
 
-        <a href="/">Home</a>
+        <div class="logo">
+            MedSafe AI
+        </div>
 
-        <a href="/scanner">Scanner</a>
+        <div class="nav-links">
 
-        <a href="/complaint">Complaint</a>
+            <a href="/">Home</a>
 
-        <a href="/view_complaints">Registered Complaints</a>
+            <a href="/scanner">Scanner</a>
 
-        <a href="/about">About</a>
+            <a href="/medicine_info">Medicine Info</a>
+
+            <a href="/complaint">Complaint</a>
+
+            <a href="/view_complaints">Complaints</a>
+
+            <a href="/about">About</a>
+
+        </div>
 
     </div>
 
     <div class="container">
 
-        <h1>Registered Complaints</h1>
+        <div class="title">
 
-        <table>
+            <h1>Registered Complaints</h1>
 
-            <tr>
+            <p>
 
-                <th>ID</th>
-                <th>Shop</th>
-                <th>Location</th>
-                <th>Medicine</th>
-                <th>Complaint</th>
+                Public complaint records against suspicious
+                medicines and medical shops.
 
-            </tr>
+            </p>
 
-            {% for complaint in complaints %}
+        </div>
 
-            <tr>
+        <div class="table-box">
 
-                <td>{{ complaint[0] }}</td>
-                <td>{{ complaint[1] }}</td>
-                <td>{{ complaint[2] }}</td>
-                <td>{{ complaint[3] }}</td>
-                <td>{{ complaint[4] }}</td>
+            {% if complaints %}
 
-            </tr>
+            <table>
 
-            {% endfor %}
+                <tr>
 
-        </table>
+                    <th>ID</th>
+                    <th>Shop</th>
+                    <th>Location</th>
+                    <th>Medicine</th>
+                    <th>Complaint</th>
+                    <th>Status</th>
+
+                </tr>
+
+                {% for complaint in complaints %}
+
+                <tr>
+
+                    <td>{{ complaint[0] }}</td>
+
+                    <td>{{ complaint[1] }}</td>
+
+                    <td>{{ complaint[2] }}</td>
+
+                    <td>{{ complaint[3] }}</td>
+
+                    <td>{{ complaint[4] }}</td>
+
+                    <td>
+
+                        <span class="badge">
+
+                            Reported
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+            {% else %}
+
+            <div class="no-data">
+
+                🚫 No Complaints Registered Yet
+
+            </div>
+
+            {% endif %}
+
+        </div>
 
     </div>
 
