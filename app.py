@@ -61,7 +61,6 @@ def scanner():
 
         if file:
 
-            # Save uploaded image
             file_path = "medicine.jpg"
             file.save(file_path)
 
@@ -95,9 +94,7 @@ def scanner():
             clean_text = clean_text.replace(" ", "")
             clean_text = clean_text.replace("\n", "")
 
-            # -----------------------------
             # Medicine Detection
-            # -----------------------------
             found = False
 
             for med in medicines:
@@ -129,9 +126,7 @@ def scanner():
 
                     break
 
-            # -----------------------------
             # Fake Detection
-            # -----------------------------
             if not found:
 
                 medicine_name = "Unknown Medicine"
@@ -189,6 +184,97 @@ def medicine_info():
 
 
 # -----------------------------
+# AI HEALTH ASSISTANT
+# -----------------------------
+@app.route("/assistant", methods=["GET", "POST"])
+def assistant():
+
+    answer = ""
+
+    if request.method == "POST":
+
+        question = request.form["question"].lower()
+
+        # FEVER
+        if "fever" in question:
+
+            answer = """
+            Paracetamol or Dolo 650 are commonly
+            used for fever relief.
+            Drink plenty of water and take proper rest.
+            """
+
+        # HEADACHE
+        elif "headache" in question:
+
+            answer = """
+            Paracetamol may help relieve headaches.
+            Avoid stress and stay hydrated.
+            """
+
+        # COLD
+        elif "cold" in question:
+
+            answer = """
+            Cetirizine is commonly used for cold
+            and allergy symptoms.
+            """
+
+        # COUGH
+        elif "cough" in question:
+
+            answer = """
+            Cough syrups and steam inhalation
+            may help reduce cough symptoms.
+            """
+
+        # STOMACH PAIN
+        elif "stomach" in question:
+
+            answer = """
+            Avoid oily foods and consult a doctor
+            if pain continues.
+            """
+
+        # SIDE EFFECTS
+        elif "side effect" in question:
+
+            answer = """
+            Some medicines may cause nausea,
+            dizziness, headache, or sleepiness.
+            """
+
+        # EXPIRED MEDICINE
+        elif "expired" in question:
+
+            answer = """
+            Expired medicines should NOT be consumed.
+            They may become unsafe or less effective.
+            """
+
+        # FAKE MEDICINE
+        elif "fake medicine" in question:
+
+            answer = """
+            Fake medicines may contain harmful substances.
+            Always buy medicines from trusted pharmacies.
+            """
+
+        # DEFAULT RESPONSE
+        else:
+
+            answer = """
+            Please consult a doctor or pharmacist
+            for proper medical advice.
+            """
+
+    return render_template(
+        "assistant.html",
+        answer=answer
+    )
+
+
+# -----------------------------
 # COMPLAINT PAGE
 # -----------------------------
 @app.route("/complaint", methods=["GET", "POST"])
@@ -203,7 +289,6 @@ def complaint():
         medicine = request.form["medicine"]
         complaint_text = request.form["complaint"]
 
-        # Save Complaint
         conn = sqlite3.connect("complaints.db")
         cursor = conn.cursor()
 

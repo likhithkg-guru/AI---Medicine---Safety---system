@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Health Assistant</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:linear-gradient(to right,#141e30,#243b55);
+            min-height:100vh;
+            color:white;
+        }
+
+        .navbar{
+
+            padding:20px 60px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            background:rgba(255,255,255,0.05);
+
+            backdrop-filter:blur(10px);
+        }
+
+        .logo{
+            font-size:30px;
+            font-weight:bold;
+            color:#00e5ff;
+        }
+
+        .nav-links a{
+
+            color:white;
+            text-decoration:none;
+            margin-left:25px;
+            font-size:18px;
+        }
+
+        .nav-links a:hover{
+            color:#00e5ff;
+        }
+
+        .main{
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            padding:60px;
+        }
+
+        .chat-box{
+
+            width:800px;
+
+            background:rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(12px);
+
+            border-radius:30px;
+
+            padding:40px;
+
+            box-shadow:0px 0px 30px rgba(0,0,0,0.4);
+        }
+
+        .chat-box h1{
+
+            text-align:center;
+            font-size:55px;
+            color:#00e5ff;
+
+            margin-bottom:20px;
+        }
+
+        .chat-box p{
+
+            text-align:center;
+            color:#ddd;
+
+            margin-bottom:35px;
+        }
+
+        input{
+
+            width:100%;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:15px;
+
+            margin-bottom:20px;
+
+            font-size:18px;
+
+            outline:none;
+        }
+
+        button{
+
+            width:100%;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:15px;
+
+            background:#00e5ff;
+
+            color:black;
+
+            font-size:22px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        button:hover{
+
+            transform:scale(1.03);
+
+            box-shadow:0px 0px 20px #00e5ff;
+        }
+
+        .response{
+
+            margin-top:35px;
+
+            background:rgba(255,255,255,0.08);
+
+            padding:25px;
+
+            border-radius:20px;
+
+            line-height:1.8;
+        }
+
+        .response h2{
+            color:#00ff99;
+            margin-bottom:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            MedSafe AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+            <a href="/scanner">Scanner</a>
+            <a href="/medicine_info">Medicine Info</a>
+            <a href="/assistant">AI Assistant</a>
+            <a href="/complaint">Complaint</a>
+
+        </div>
+
+    </div>
+
+    <div class="main">
+
+        <div class="chat-box">
+
+            <h1>AI Health Assistant</h1>
+
+            <p>
+
+                Ask anything about medicines and healthcare.
+
+            </p>
+
+            <form method="POST">
+
+                <input
+                type="text"
+                name="question"
+                placeholder="Ask your health question..."
+                required>
+
+                <button type="submit">
+
+                    🤖 Ask AI Assistant
+
+                </button>
+
+            </form>
+
+            {% if answer %}
+
+            <div class="response">
+
+                <h2>AI Response</h2>
+
+                <p>{{ answer }}</p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
