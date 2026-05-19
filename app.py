@@ -8,9 +8,9 @@ import sqlite3
 
 app = Flask(__name__)
 
-# -----------------------------
-# CREATE DATABASE
-# -----------------------------
+# --------------------------------
+# DATABASE
+# --------------------------------
 conn = sqlite3.connect("complaints.db")
 cursor = conn.cursor()
 
@@ -27,23 +27,21 @@ CREATE TABLE IF NOT EXISTS complaints(
 conn.commit()
 conn.close()
 
-# -----------------------------
-# Tesseract Path
-# -----------------------------
+# --------------------------------
+# TESSERACT PATH
+# --------------------------------
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-
-# -----------------------------
+# --------------------------------
 # HOME PAGE
-# -----------------------------
+# --------------------------------
 @app.route("/")
 def home():
     return render_template("home.html")
 
-
-# -----------------------------
+# --------------------------------
 # SCANNER PAGE
-# -----------------------------
+# --------------------------------
 @app.route("/scanner", methods=["GET", "POST"])
 def scanner():
 
@@ -76,25 +74,25 @@ def scanner():
 
             img = img.filter(ImageFilter.SHARPEN)
 
-            # OCR Text
+            # OCR TEXT
             text = pytesseract.image_to_string(img)
 
             print("\nExtracted Text:\n")
             print(text)
 
-            # Extract Dates
+            # EXTRACT DATES
             dates = re.findall(r'\d{2}/\d{4}', text)
 
             if len(dates) >= 2:
                 mfg = dates[0]
                 exp = dates[1]
 
-            # Clean OCR Text
+            # CLEAN TEXT
             clean_text = text.lower()
             clean_text = clean_text.replace(" ", "")
             clean_text = clean_text.replace("\n", "")
 
-            # Medicine Detection
+            # MEDICINE DETECTION
             found = False
 
             for med in medicines:
@@ -111,32 +109,29 @@ def scanner():
 
                     fake_status = "REAL MEDICINE"
 
-                    # Expiry Check
+                    # EXPIRY CHECK
                     try:
 
                         expiry_date = datetime.strptime(exp, "%m/%Y")
 
                         if expiry_date < datetime.now():
-                            status = "Expired"
+                            status = "Expired Medicine"
                         else:
-                            status = "Safe"
+                            status = "Safe Medicine"
 
                     except:
                         status = "Unknown"
 
                     break
 
-            # Fake Detection
+            # IF NOT FOUND
             if not found:
 
                 medicine_name = "Unknown Medicine"
-
                 uses = "Not Available"
-
                 side_effects = "Not Available"
 
                 fake_status = "POSSIBLE FAKE MEDICINE"
-
                 status = "Unsafe"
 
     return render_template(
@@ -150,10 +145,9 @@ def scanner():
         fake_status=fake_status
     )
 
-
-# -----------------------------
+# --------------------------------
 # MEDICINE INFO PAGE
-# -----------------------------
+# --------------------------------
 @app.route("/medicine_info", methods=["GET", "POST"])
 def medicine_info():
 
@@ -171,9 +165,7 @@ def medicine_info():
             if medicine_name.lower() == med.lower():
 
                 result = medicines[med]
-
                 result["name"] = med
-
                 break
 
     return render_template(
@@ -182,10 +174,9 @@ def medicine_info():
         searched=searched
     )
 
-
-# -----------------------------
-# AI HEALTH ASSISTANT
-# -----------------------------
+# --------------------------------
+# AI ASSISTANT
+# --------------------------------
 @app.route("/assistant", methods=["GET", "POST"])
 def assistant():
 
@@ -196,76 +187,195 @@ def assistant():
         question = request.form["question"].lower()
 
         # FEVER
-        if "fever" in question:
+        if (
+            "fever" in question
+            or "temperature" in question
+            or "body pain" in question
+        ):
 
             answer = """
-            Paracetamol or Dolo 650 are commonly
-            used for fever relief.
-            Drink plenty of water and take proper rest.
+            You may have fever symptoms.
+
+            Common medicines:
+            • Dolo 650
+            • Paracetamol
+
+            Advice:
+            • Drink plenty of water
+            • Take proper rest
+            • Eat healthy food
             """
 
         # HEADACHE
-        elif "headache" in question:
+        elif (
+            "headache" in question
+            or "head pain" in question
+            or "migraine" in question
+        ):
 
             answer = """
-            Paracetamol may help relieve headaches.
-            Avoid stress and stay hydrated.
+            You may have headache symptoms.
+
+            Common medicine:
+            • Paracetamol
+
+            Advice:
+            • Sleep properly
+            • Stay hydrated
+            • Avoid stress
             """
 
-        # COLD
-        elif "cold" in question:
+        # COLD / NOSE BLOCK
+        elif (
+            "cold" in question
+            or "nose blocked" in question
+            or "blocked nose" in question
+            or "runny nose" in question
+            or "sneezing" in question
+            or "nose" in question
+        ):
 
             answer = """
-            Cetirizine is commonly used for cold
-            and allergy symptoms.
+            It may be common cold or allergy symptoms.
+
+            Common medicines:
+            • Cetirizine
+            • Cold tablets
+
+            Advice:
+            • Drink warm water
+            • Take steam inhalation
+            • Take rest
             """
 
         # COUGH
-        elif "cough" in question:
+        elif (
+            "cough" in question
+            or "throat pain" in question
+            or "sore throat" in question
+        ):
 
             answer = """
-            Cough syrups and steam inhalation
-            may help reduce cough symptoms.
+            You may have cough symptoms.
+
+            Suggestions:
+            • Cough syrup
+            • Warm water
+            • Steam inhalation
+
+            Avoid cold drinks.
             """
 
         # STOMACH PAIN
-        elif "stomach" in question:
+        elif (
+            "stomach" in question
+            or "gas" in question
+            or "acidity" in question
+            or "vomit" in question
+        ):
 
             answer = """
-            Avoid oily foods and consult a doctor
-            if pain continues.
+            You may have stomach irritation.
+
+            Advice:
+            • Avoid oily food
+            • Drink water
+            • Eat simple food
+
+            Consult doctor if pain continues.
+            """
+
+        # BREATHING / ASTHMA
+        elif (
+            "asthma" in question
+            or "breathing" in question
+            or "breath problem" in question
+            or "wheezing" in question
+        ):
+
+            answer = """
+            Breathing problems may require medical attention.
+
+            Common medicine:
+            • Doxofylline Tablets IP
+
+            Please consult a doctor before taking asthma medicines.
             """
 
         # SIDE EFFECTS
-        elif "side effect" in question:
+        elif (
+            "side effect" in question
+            or "reaction" in question
+        ):
 
             answer = """
-            Some medicines may cause nausea,
-            dizziness, headache, or sleepiness.
+            Some medicines may cause:
+            • Nausea
+            • Headache
+            • Dizziness
+            • Sleepiness
             """
 
         # EXPIRED MEDICINE
-        elif "expired" in question:
+        elif (
+            "expired" in question
+            or "expiry" in question
+        ):
 
             answer = """
-            Expired medicines should NOT be consumed.
-            They may become unsafe or less effective.
+            Expired medicines should NOT be used.
+
+            Always check expiry date before consuming medicines.
             """
 
         # FAKE MEDICINE
-        elif "fake medicine" in question:
+        elif (
+            "fake medicine" in question
+            or "duplicate medicine" in question
+        ):
 
             answer = """
-            Fake medicines may contain harmful substances.
+            Fake medicines can be dangerous.
+
             Always buy medicines from trusted pharmacies.
             """
 
-        # DEFAULT RESPONSE
+        # DOLO
+        elif (
+            "dolo" in question
+            or "dolo 650" in question
+        ):
+
+            answer = """
+            Dolo 650 is commonly used for:
+            • Fever
+            • Body pain
+            • Mild headache
+
+            Usually taken after food.
+            """
+
+        # PARACETAMOL
+        elif "paracetamol" in question:
+
+            answer = """
+            Paracetamol helps reduce:
+            • Fever
+            • Headache
+            • Mild body pain
+            """
+
+        # DEFAULT
         else:
 
             answer = """
-            Please consult a doctor or pharmacist
-            for proper medical advice.
+            Sorry, I could not fully understand.
+
+            Try questions like:
+            • I have fever
+            • My nose is blocked
+            • I have cough
+            • Tell me about Dolo 650
             """
 
     return render_template(
@@ -273,10 +383,9 @@ def assistant():
         answer=answer
     )
 
-
-# -----------------------------
+# --------------------------------
 # COMPLAINT PAGE
-# -----------------------------
+# --------------------------------
 @app.route("/complaint", methods=["GET", "POST"])
 def complaint():
 
@@ -307,10 +416,9 @@ def complaint():
         success=success
     )
 
-
-# -----------------------------
-# VIEW COMPLAINTS PAGE
-# -----------------------------
+# --------------------------------
+# VIEW COMPLAINTS
+# --------------------------------
 @app.route("/view_complaints")
 def view_complaints():
 
@@ -328,17 +436,15 @@ def view_complaints():
         complaints=complaints
     )
 
-
-# -----------------------------
+# --------------------------------
 # ABOUT PAGE
-# -----------------------------
+# --------------------------------
 @app.route("/about")
 def about():
     return render_template("about.html")
 
-
-# -----------------------------
+# --------------------------------
 # RUN FLASK
-# -----------------------------
+# --------------------------------
 if __name__ == "__main__":
     app.run(debug=True)
