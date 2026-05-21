@@ -46,6 +46,7 @@ def home():
 def scanner():
 
     medicine_name = ""
+    composition = ""
     uses = ""
     side_effects = ""
     mfg = ""
@@ -102,7 +103,8 @@ def scanner():
                 if med_clean in clean_text:
 
                     found = True
-
+                    composition = medicines[med]
+                    ["composition"]
                     medicine_name = med
                     uses = medicines[med]["uses"]
                     side_effects = medicines[med]["side_effects"]
@@ -137,6 +139,7 @@ def scanner():
     return render_template(
         "index.html",
         medicine=medicine_name,
+        composition = composition,
         uses=uses,
         side_effects=side_effects,
         mfg=mfg,
