@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Medicine Safety Detector</title>
@@ -129,6 +130,7 @@
         .card p{
             color:#64748b;
             margin-bottom:20px;
+            line-height:1.6;
         }
 
         .card button{
@@ -139,6 +141,10 @@
             border-radius:10px;
             cursor:pointer;
             font-size:16px;
+        }
+
+        .card button:hover{
+            background:#1d4ed8;
         }
 
         /* INFO BOX */
@@ -267,7 +273,7 @@
 
             <a href="/medicine_info">
                 <i class="fa-solid fa-capsules"></i>
-                Medicine Database
+                Medicine Information
             </a>
 
             <a href="/assistant">
@@ -277,7 +283,7 @@
 
             <a href="/complaint">
                 <i class="fa-solid fa-circle-exclamation"></i>
-                Complaint
+                Register Complaint
             </a>
 
             <a href="/view_complaints">
@@ -310,6 +316,8 @@
 
         <div class="cards">
 
+            <!-- SCAN MEDICINE -->
+
             <div class="card">
 
                 <i class="fa-solid fa-camera"></i>
@@ -321,55 +329,69 @@
                 </p>
 
                 <a href="/scanner">
+
                     <button>Scan Now</button>
+
                 </a>
 
             </div>
 
+            <!-- MEDICINE INFORMATION -->
+
             <div class="card">
 
-                <i class="fa-solid fa-file-waveform"></i>
+                <i class="fa-solid fa-capsules"></i>
 
-                <h3>OCR EXTRACTION</h3>
+                <h3>MEDICINE INFORMATION</h3>
 
                 <p>
-                    Extract medicine details using OCR technology.
+                    View medicine uses, composition and side effects.
                 </p>
 
-                <a href="/scanner">
+                <a href="/medicine_info">
+
                     <button>View Details</button>
+
                 </a>
 
             </div>
 
+            <!-- AI ASSISTANT -->
+
             <div class="card">
 
-                <i class="fa-solid fa-brain"></i>
+                <i class="fa-solid fa-robot"></i>
 
-                <h3>AI ANALYSIS</h3>
+                <h3>AI ASSISTANT</h3>
 
                 <p>
-                    AI analyzes safety and medicine information.
+                    AI provides basic medicine and health suggestions.
                 </p>
 
                 <a href="/assistant">
-                    <button>Analyze Now</button>
+
+                    <button>Ask AI</button>
+
                 </a>
 
             </div>
 
+            <!-- REGISTER COMPLAINT -->
+
             <div class="card">
 
-                <i class="fa-solid fa-shield-halved"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
 
-                <h3>SAFETY RESULT</h3>
+                <h3>REGISTER COMPLAINT</h3>
 
                 <p>
-                    Get safety report and recommendations instantly.
+                    Register complaints about fake or unsafe medicines.
                 </p>
 
-                <a href="/scanner">
-                    <button>View Results</button>
+                <a href="/complaint">
+
+                    <button>Register Now</button>
+
                 </a>
 
             </div>
@@ -434,12 +456,12 @@
 
                 <div class="step">
 
-                    <i class="fa-solid fa-brain"></i>
+                    <i class="fa-solid fa-robot"></i>
 
-                    <h3>AI Analysis</h3>
+                    <h3>AI Assistant</h3>
 
                     <p>
-                        AI checks medicine safety and validity
+                        AI gives medicine safety suggestions
                     </p>
 
                 </div>
@@ -448,12 +470,12 @@
 
                 <div class="step">
 
-                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    <i class="fa-solid fa-circle-check"></i>
 
-                    <h3>Get Results</h3>
+                    <h3>Register Complaint</h3>
 
                     <p>
-                        View detailed medicine safety report
+                        Register fake medicine complaints
                     </p>
 
                 </div>
