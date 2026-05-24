@@ -162,6 +162,7 @@
             type="text"
             name="medicine"
             placeholder="Enter medicine name..."
+            value = "{{ medicine_text }}"
             required>
 
             <button type="submit">
@@ -174,23 +175,25 @@
 
         {% if result %}
 
-        <div class="result">
+<div class="result">
 
-            <div class="success">
+    <div class="success">
 
-                ✅ Medicine Found
+        ✅ Medicine Found
 
-            </div>
+    </div>
 
-            <p><b>Medicine:</b> {{ result.name }}</p>
+    <p><b>Medicine:</b> {{ result.name }}</p>
 
-            <p><b>Uses:</b> {{ result.uses }}</p>
+    <p><b>Composition:</b> {{ result.composition }}</p>
 
-            <p><b>Side Effects:</b> {{ result.side_effects }}</p>
+    <p><b>Uses:</b> {{ result.uses }}</p>
 
-        </div>
+    <p><b>Side Effects:</b> {{ result.side_effects }}</p>
 
-        {% endif %}
+</div>
+
+{% endif %}
 
         {% if searched and not result %}
 

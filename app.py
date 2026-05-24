@@ -156,25 +156,57 @@ def medicine_info():
 
     result = None
     searched = False
+    medicine_text = ""
+
+    medicines = {
+
+        "dolo 650": {
+            "composition":"Paracetamol",
+            "uses":"Fever and body pain",
+            "side_effects":"Nausea"
+        },
+
+        "paracetamol": {
+            "composition":"Paracetamol",
+            "uses":"Fever and pain relief",
+            "side_effects":"Liver damage if overdosed"
+        },
+
+        "crocin": {
+            "composition":"Paracetamol",
+            "uses":"Cold and fever",
+            "side_effects":"Vomiting"
+        },
+
+        "cetirizine": {
+            "composition":"Cetirizine",
+            "uses":"Cold and allergy",
+            "side_effects":"Sleepiness"
+        }
+
+    }
 
     if request.method == "POST":
 
         searched = True
 
-        medicine_name = request.form["medicine"]
+        medicine_text = request.form["medicine"].lower()
 
         for med in medicines:
 
-            if medicine_name.lower() == med.lower():
+            if med in medicine_text:
 
                 result = medicines[med]
-                result["name"] = med
+
+                result["name"] = med.upper()
+
                 break
 
     return render_template(
         "medicine_info.html",
         result=result,
-        searched=searched
+        searched=searched,
+        medicine_text=medicine_text
     )
 
 # --------------------------------
@@ -184,6 +216,7 @@ def medicine_info():
 def assistant():
 
     answer = ""
+    question = ""
 
     if request.method == "POST":
 
@@ -383,7 +416,8 @@ def assistant():
 
     return render_template(
         "assistant.html",
-        answer=answer
+        answer=answer,
+        question = question
     )
 
 # --------------------------------
