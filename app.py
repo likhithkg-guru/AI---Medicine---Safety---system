@@ -436,7 +436,9 @@ def complaint():
         complaint_text = request.form["complaint"]
 
         conn = sqlite3.connect("complaints.db")
+
         cursor = conn.cursor()
+
 
         cursor.execute(
             "INSERT INTO complaints(shop, location, medicine, complaint) VALUES(?,?,?,?)",
@@ -444,6 +446,7 @@ def complaint():
         )
 
         conn.commit()
+
         conn.close()
 
         success = True
